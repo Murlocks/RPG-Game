@@ -175,7 +175,6 @@ public class Interaction extends BasicTWLGameState{
 					showChoices = true;
 				}
 				if(!spacePause&&!npc.getComponent(Npc.class).hasDialogChoices(dialogNum)){
-					showChoices = true;
 					//check to see if there is another dialog page to display, even if it doesn't have choices
 					if(dialogNum<npc.getComponent(Npc.class).getDialog().size()-1){
 						dialogNum++;
