@@ -34,7 +34,7 @@ public class SaveMenu extends BasicTWLGameState{
 	public final static int ID = 2;
 
 	public TWLStateBasedGame game;
-	private Core gameCore;
+	private Game gameCore;
 	
 	private String fileName;
 	private File file;
@@ -203,13 +203,13 @@ public class SaveMenu extends BasicTWLGameState{
 		GameSave save = (GameSave)xstream.fromXML(stringBuffer.toString());	//converts the save xml file into a GameSave object named save
 		gameCore.loadGame(save);	//calls core object's loadGame function passing the save object
 		JOptionPane.showMessageDialog(null, "Game successfully loaded", "Success!", JOptionPane.PLAIN_MESSAGE);	//show a dialog box
-		game.enterState(Core.ID, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));	//change state to ingame
+		game.enterState(Game.ID, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));	//change state to ingame
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame game) throws SlickException{
 		this.game = (TWLStateBasedGame)game;
-		this.gameCore = (Core)game.getState(Core.ID);
+		this.gameCore = (Game)game.getState(Game.ID);
 			try {
 				createSaveFile("save1");
 				createSaveFile("save2");
@@ -228,7 +228,7 @@ public class SaveMenu extends BasicTWLGameState{
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException{
-		if (gc.getInput().isKeyDown(Input.KEY_ESCAPE)) game.enterState(Core.ID, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+		if (gc.getInput().isKeyDown(Input.KEY_ESCAPE)) game.enterState(Game.ID, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 	}
 
 	@Override

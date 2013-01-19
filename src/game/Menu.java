@@ -29,7 +29,7 @@ public class Menu extends BasicTWLGameState{
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException{
-		if(gc.getInput().isKeyDown(Input.KEY_E))	game.enterState(Core.ID, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+		if(gc.getInput().isKeyDown(Input.KEY_E))	game.enterState(Game.ID, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 		if(gc.getInput().isKeyDown(Input.KEY_ESCAPE))	gc.exit();
 		if(gc.getInput().isKeyDown(Input.KEY_S))	game.enterState(SaveMenu.ID, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 	}

@@ -30,7 +30,7 @@ public class Interaction extends BasicTWLGameState{
 	public static final int ID = 3;
 	
 	public TWLStateBasedGame game;
-	private Core gameCore;
+	private Game gameCore;
 	private World world;
 	private TagManager tagManager;
 	private RenderManager<Graphics> renderManager;
@@ -103,7 +103,7 @@ public class Interaction extends BasicTWLGameState{
 	@Override
 	public void init(GameContainer gc, StateBasedGame game) throws SlickException{
 		this.game = (TWLStateBasedGame)game;
-		this.gameCore = (Core) game.getState(Core.ID);
+		this.gameCore = (Game) game.getState(Game.ID);
 		this.world = gameCore.getWorld();
 		this.tagManager = world.getManager(TagManager.class);
 		this.renderManager = world.getManager(RenderManager.class);
@@ -188,14 +188,14 @@ public class Interaction extends BasicTWLGameState{
 						spacePause = true;
 					}else{
 						npc.getComponent(Npc.class).setDirection(origDirection);
-						game.enterState(Core.ID, new FadeOutTransition(new Color(0.0f, 0.0f, 0.0f, 0.6f)), new FadeInTransition(Color.transparent));
+						game.enterState(Game.ID, new FadeOutTransition(new Color(0.0f, 0.0f, 0.0f, 0.6f)), new FadeInTransition(Color.transparent));
 					}
 				}
 			}
 		}
 		if(gc.getInput().isKeyDown(Input.KEY_ESCAPE)){
 			npc.getComponent(Npc.class).setDirection(origDirection);
-			game.enterState(Core.ID, new FadeOutTransition(new Color(0.0f, 0.0f, 0.0f, 0.6f)), new FadeInTransition(Color.transparent));
+			game.enterState(Game.ID, new FadeOutTransition(new Color(0.0f, 0.0f, 0.0f, 0.6f)), new FadeInTransition(Color.transparent));
 		}
 		
 		if(gc.getInput().isKeyPressed(Input.KEY_W)){
@@ -222,31 +222,31 @@ public class Interaction extends BasicTWLGameState{
 		untranslateGraphics(g);	//allows us to draw the gui elements based on "normal" coordinates
 		//draw gui elements
 		g.setColor(new Color(0.0f, 0.0f, 0.0f, 0.6f));
-		g.fillRect(0, 0, Core.WIDTH, Core.HEIGHT);
+		g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 		g.setColor(Color.black);
-		g.fillRect(0, Core.HEIGHT*2/3, Core.WIDTH, Core.HEIGHT);
+		g.fillRect(0, Game.HEIGHT*2/3, Game.WIDTH, Game.HEIGHT);
 		g.setColor(new Color(1.0f, 1.0f, 1.0f, 1.0f));
 		Entity npc = tagManager.getEntity(Tags.InteractingNpc);
 		if(npc != null){
-			g.drawImage(playerPortrait, 0, (Core.HEIGHT*2/3)-playerPortrait.getHeight());
-			g.drawImage(npc.getComponent(Npc.class).getPortrait(), Core.WIDTH-npc.getComponent(Npc.class).getPortrait().getWidth(), (Core.HEIGHT*2/3)-npc.getComponent(Npc.class).getPortrait().getHeight());
-			g.drawString(npc.getComponent(Npc.class).getName(), 10, (Core.HEIGHT*2/3)+6);
+			g.drawImage(playerPortrait, 0, (Game.HEIGHT*2/3)-playerPortrait.getHeight());
+			g.drawImage(npc.getComponent(Npc.class).getPortrait(), Game.WIDTH-npc.getComponent(Npc.class).getPortrait().getWidth(), (Game.HEIGHT*2/3)-npc.getComponent(Npc.class).getPortrait().getHeight());
+			g.drawString(npc.getComponent(Npc.class).getName(), 10, (Game.HEIGHT*2/3)+6);
 			//print the dialog
 			if(!showChoices){
 				for(int i=0;i<5;i++){
-					g.drawString(line[i], 48, (Core.HEIGHT*2/3)+(i*20)+30);
+					g.drawString(line[i], 48, (Game.HEIGHT*2/3)+(i*20)+30);
 				}
 				if(donePrinting){
-					g.drawString("Press space bar to continue", 190, (Core.HEIGHT*2/3)+130);
+					g.drawString("Press space bar to continue", 190, (Game.HEIGHT*2/3)+130);
 				}
 			}else{
 				HashMap<Integer, DialogChoice> choices = npc.getComponent(Npc.class).getDialogChoices(dialogNum);
 				if(choices!=null){
 					for(int i = 1; i<choices.size()+1; i++){
-						g.drawString(choices.get(i).getChoice(), 48, (Core.HEIGHT*2/3)+(i*20)+30);
+						g.drawString(choices.get(i).getChoice(), 48, (Game.HEIGHT*2/3)+(i*20)+30);
 					}
 					if(currentChoice!=0){
-						g.fillRect(40, (Core.HEIGHT*2/3)+(currentChoice*20)+30, 5, 5);
+						g.fillRect(40, (Game.HEIGHT*2/3)+(currentChoice*20)+30, 5, 5);
 					}
 				}
 			}
