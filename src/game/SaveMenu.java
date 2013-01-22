@@ -167,7 +167,7 @@ public class SaveMenu extends BasicTWLGameState{
     }
 	
 	public void setSaveFile(String name){
-		this.fileName = "saves/"+name+".awesome";
+		this.fileName = "saves/"+name+".a 	wesome";
 		this.file = new File(fileName);
 	}
 	

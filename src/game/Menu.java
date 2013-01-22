@@ -1,6 +1,10 @@
 package game;
 
 
+import java.io.File;
+
+import game.data.Level;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -9,6 +13,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
+
+import com.thoughtworks.xstream.XStream;
 
 import TWLSlick.BasicTWLGameState;
 
@@ -32,6 +38,15 @@ public class Menu extends BasicTWLGameState{
 		if(gc.getInput().isKeyDown(Input.KEY_E))	game.enterState(Game.ID, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 		if(gc.getInput().isKeyDown(Input.KEY_ESCAPE))	gc.exit();
 		if(gc.getInput().isKeyDown(Input.KEY_S))	game.enterState(SaveMenu.ID, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+		if(gc.getInput().isKeyDown(Input.KEY_T))	test();
+	}
+	
+	private void test(){
+		XStream xstream = new XStream();
+		xstream.registerConverter(new LevelImporter());
+		xstream.alias("Level", Level.class);
+		Level level = (Level)xstream.fromXML(new File("level.gleed"));
+		System.out.println(level.getName());
 	}
 
 	@Override

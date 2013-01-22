@@ -29,6 +29,7 @@ public class RPG extends TWLStateBasedGame {
 		if(this.getCurrentStateID() == 0){
 			if(JOptionPane.showConfirmDialog(null, "Would you like to save your game?", "Leaving already?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
 				this.enterState(SaveMenu.ID);
+				return false;
 			}
 		}
 		return true;
